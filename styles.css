@@ -1,0 +1,204 @@
+html {
+    scroll-behavior: smooth;
+  }
+  
+  * {
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.3s ease;
+  }
+  body {
+    margin: 0;
+    font-family: var(--md-ref-typeface-plain);
+    background: linear-gradient(135deg, #f9f9f9, #ffffff);
+  }
+  
+  md-top-app-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    padding: 20px;
+  }
+  main {
+    padding: 120px 20px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .menu a {
+    font-size: 1.2em;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+  .menu a:hover {
+    background-color: var(--md-sys-color-primary);
+    color: #fff;
+  }
+  .card {
+    width: 50%;
+    padding: 25px;
+    margin: 25px auto;
+    border-radius: 15px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  .filled_card {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 30%, white 70%);
+    margin: 10px 0;
+    border-radius: 12px;
+    padding: 15px;
+  }
+  .elevated_card {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 10%, white 90%);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    border-radius: 12px;
+  }
+  .outlined_card {
+    background-color: color-mix(in srgb, var(--md-sys-color-primary) 10%, white 90%);
+    border: 1px solid #999;
+    border-radius: 12px;
+  }
+  h1, h2, h3 {
+    margin-top: 0;
+    font-family: var(--md-ref-typeface-brand);
+    position: relative;
+    scroll-margin-top: 120px;
+  }
+  h1 {
+    font-weight: 400;
+    font-size: 2.2em;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-weight: 300;
+    font-size: 1.6em;
+    margin-bottom: 8px;
+  }
+  p, li {
+    font-size: 1em;
+    line-height: 1.6em;
+  }
+  ul {
+    padding-left: 25px;
+  }
+  a {
+    color: var(--md-sys-color-secondary);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  pre {
+    background: #353030;
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 12px;
+    overflow-x: auto;
+    font-family: monospace;
+  }
+  footer {
+    text-align: center;
+    padding: 25px;
+    font-size: 0.9em;
+    color: #555;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+  }
+  :root {
+    --md-sys-color-primary: olive;
+    --md-sys-color-secondary: tomato; 
+    --md-ref-typeface-brand: 'Google Sans';
+    --md-ref-typeface-plain: system-ui, sans-serif;
+  }
+  .highlight {
+    background-color: rgba(255, 235, 59, 0.5);
+    border-radius: 3px;
+  }
+  .anch {
+    opacity: 0;
+    font-size: 0.8em;
+    margin-left: 8px;
+    color: var(--md-sys-color-secondary);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  h1:hover .anch,
+  h2:hover .anch,
+  h3:hover .anch {
+    opacity: 1;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  }
+  .video-container {
+    max-width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  .video-container canvas {
+    width: 50%;
+    height: auto;
+    margin: auto;
+    border-radius: 10px;
+  }
+  video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  #pointer, #scroll_point {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: none;
+    display: none;
+    background-color: rgba(255, 170, 170, 0.8);
+    z-index: 100;
+    transition: transform 0.1s linear;
+    animation: pulse 1s infinite;
+    box-shadow: 0 0 10px rgba(255, 170, 170, 0.8);
+  }
+  #scroll_point {
+    background-color: rgba(252, 213, 130, 0.8);
+    box-shadow: 0 0 10px rgba(252, 213, 130, 0.8);
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  md-filled-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  h1 {
+    font-size: 500%;
+    text-align: center;
+    padding: 20px 0px;
+  }
+  @media (max-width: 600px) {
+    .video-container canvas {
+      width: 100%;
+    }
+  }
