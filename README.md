@@ -1,5 +1,7 @@
 # pc-gesture-control
  Touchless gesture control of your computer. Uses Mediapipe and Python for hand detection and input emulation. Supports Windows and Chrome. In beta right now.
+## How do i use it?
+Open `releases` branch. ([https://github.com/rakaplay/pc-gesture-control](https://github.com/rakaplay/pc-gesture-control/tree/releases))
 ## Which input events are supported?
 1. Click. Just bring your index finger and thumb together like guys with Apple Vision Pro do.
 2. Pointer-controlling. Just keep your index finger and thumb together.
