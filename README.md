@@ -4,7 +4,7 @@
  Touchless gesture control of your computer. Uses Mediapipe and Python for hand detection and input emulation. Supports Windows and Chrome. In beta right now.
 ## How do I run it? 
 #### 1. Download "dist" folder. 
-Download it from `releases`["https://github.com/rakaplay/pc-gesture-control/tree/releases"] branch and run. This is server build that was made with `pyinstaller`. In the future, it is planned to make compiled `.EXE` using `Nuitka`, to make file lighter. 
+Download it from `releases` ("https://github.com/rakaplay/pc-gesture-control/tree/releases") branch and run. This is server build that was made with `pyinstaller`. In the future, it is planned to make compiled `.EXE` using `Nuitka`, to make file lighter. 
 #### 2. Open `.EXE` file in it. 
 This is a server that gets movement and gesture info from site. 
 #### Press "Connect" ("Подключиться").
