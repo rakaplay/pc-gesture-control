@@ -2,7 +2,7 @@
 
 ## 中文描述
 
-# pc-gesture-control (版本发布)
+# pc-gesture-control
 通过手势进行电脑的非接触式控制。使用Mediapipe和Python进行手部识别和输入模拟。支持Windows和Chrome。 这是编译版本（实际上是通过pyinstaller制作的）。
 
 ## 如何使用？
