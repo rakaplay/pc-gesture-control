@@ -1,7 +1,8 @@
 OTHER LANGUAGES:
 - [`Russian`](https://github.com/rakaplay/pc-gesture-control/blob/main/README_RU.MD)
 - `English` (you're already here)
-- [`Belarussian`](https://github.com/rakaplay/pc-gesture-control/blob/main/README_BY.md) 
+- [`Belarussian`](https://github.com/rakaplay/pc-gesture-control/blob/main/README_BY.md)
+- [`Chinese`](https://github.com/rakaplay/pc-gesture-control/blob/main/README_CN.md) 
 # pc-gesture-control
  Touchless gesture control of your computer. Uses Mediapipe and Python for hand detection and input emulation. Supports Windows and Chrome. In beta right now.
 ## How do i use it?
