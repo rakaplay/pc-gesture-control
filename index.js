@@ -1,3 +1,4 @@
+let flipX = true;
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('h1[id], h2[id], h3[id]').forEach(heading => {
     if (!heading.querySelector('.anch')) {
@@ -139,8 +140,12 @@ hands.onResults((results) => {
     const bezymFinger = landmarks[16];
     const mainPoint = landmarks[1];
     const mizinFinger = landmarks[20];
-
-    const relativeXClick = 1 - mainPoint.x;
+    let relativeXClick = 1 - mainPoint.x;
+    if (document.getElementById("flipX").selected){
+     relativeXClick = 1 - mainPoint.x;
+    } else {
+     relativeXClick = mainPoint.x;
+    }
     const relativeYClick = mainPoint.y;
     const absoluteXClick = relativeXClick * window.innerWidth;
     const absoluteYClick = relativeYClick * window.innerHeight;

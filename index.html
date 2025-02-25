@@ -18,11 +18,12 @@
       }
     }
   </script>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
   <script type="module">
+
     import '@material/web/all.js';
     import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
     document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
@@ -46,10 +47,17 @@
     <md-filled-button id="pipButton" disabled>Включить PiP</md-filled-button>
     <md-filled-button onClick="top.location.href='faq/index.html'">FAQ</md-filled-button>
   </div>
-  
+  <h1 id="anch" style="font-size: 300%;">Настройки</h2>
+  <div class="card outlined_card" style="display: flex; gap: 16px; justify-content: center;">
+    
+    <div class="card filled_card" style="display: flex; gap: 16px; justify-content: center;">
+    Инверсия по оси X
+    <md-switch selected id="flipX">
+    </md-switch>
+  </div>
+  </div>
   <div id="pointer"></div>
   <div id="scroll_point"></div>
-  
   <footer>
     © Права (не) защищены. Пж не воруйте 👉👈
   </footer>
