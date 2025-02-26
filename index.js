@@ -134,22 +134,30 @@ hands.onResults((results) => {
     drawConnectors(canvas_risovka, landmarks, HAND_CONNECTIONS, { color: "#00FF00", lineWidth: 4 });
     drawLandmarks(canvas_risovka, landmarks, { color: "#FF0000", radius: 6 });
 
-    const indexFinger = landmarks[8];
-    const middleFinger = landmarks[12];
-    const thumb = landmarks[4];
-    const bezymFinger = landmarks[16];
-    const mainPoint = landmarks[1];
-    const mizinFinger = landmarks[20];
-    let relativeXClick = 1 - mainPoint.x;
+    let indexFinger = landmarks[8];
+    let middleFinger = landmarks[12];
+    let thumb = landmarks[4];
+    let bezymFinger = landmarks[16];
+    let mainPoint = landmarks[1];
+    let mizinFinger = landmarks[20];
+    let relativeXClick = mainPoint.x;
+    const relativeYClick = mainPoint.y;
     if (document.getElementById("flipX").selected){
      relativeXClick = 1 - mainPoint.x;
     } else {
      relativeXClick = mainPoint.x;
     }
-    const relativeYClick = mainPoint.y;
+    if (document.getElementById("flipY").selected){
+      relativeYClick = 1 - mainPoint.y;
+     } else {
+      relativeYClick = mainPoint.y;
+    }
+
     const absoluteXClick = relativeXClick * window.innerWidth;
     const absoluteYClick = relativeYClick * window.innerHeight;
 
+
+    
     const relativeXScroll = 1 - indexFinger.x;
     const relativeYScroll = indexFinger.y;
     const absoluteXScroll = relativeXScroll * window.innerWidth;
