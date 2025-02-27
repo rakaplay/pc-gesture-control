@@ -6,7 +6,7 @@
   <title>Распознавание руки</title>
   
   <!-- Импорты шрифтов и иконок -->
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home" />
   
@@ -41,24 +41,29 @@
     </div>
   </div>
   
-  <div class="card outlined_card" style="display: flex; gap: 16px; justify-content: center;">
+  <div class="card outlined_card beautify-content">
     <md-filled-button id="turn_on_camera">Разрешить доступ к камере</md-filled-button>
     <md-filled-button id="turn_off_camera" disabled>Остановить камеру</md-filled-button>
     <md-filled-button id="pipButton" disabled>Включить PiP</md-filled-button>
     <md-filled-button onClick="top.location.href='faq/index.html'">FAQ</md-filled-button>
   </div>
   <h1 id="anch" style="font-size: 300%;">Настройки</h2>
-  <div class="card outlined_card" style="display: flex; gap: 16px; justify-content: center;">
+  <div class="card outlined_card beautify-content settings-container">
     
-    <div class="card filled_card" style="display: flex; gap: 16px; justify-content: center;">
+    <div class="card filled_card beautify-content setting-item">
     Инверсия положение курсора, по оси X
-    <md-switch selected id="flipX">
-    <div class="card filled_card" style="display: flex; gap: 16px; justify-content: center;">
+    <md-switch selected id="flipX"></md-switch>
+    </div>
+    <div class="card filled_card beautify-content setting-item">
       Инверсия положение курсора, по оси Y
-    <md-switch selected id="flipY">
+    <md-switch id="flipY">
     </md-switch>
   </div>
-  </div>
+ <div class="card outlined_card setting-item">
+  <span id="finger_position">Позиция клика</span>
+ </div>
+  </h1>
+</div>
   <div id="pointer"></div>
   <div id="scroll_point"></div>
   <footer>

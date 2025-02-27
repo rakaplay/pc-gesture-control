@@ -230,3 +230,18 @@ md-switch {
 md-switch:hover {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
+
+.beautify-content{
+  display: flex; gap: 16px; justify-content: center; text-align:center; vertical-align:middle;
+}
+.settings-container {
+  flex-wrap: wrap;
+  max-width: 800px; /*  ширина контейнера */
+  margin: 0 auto;
+}
+.setting-item {
+  flex: 1 1 calc(25% - 20px); /*  3 элемента в ряд, учитывая отступы */
+  max-width: calc(25% - 20px); /* Максимальная ширина элемента */
+  box-sizing: border-box;
+   margin: 10px;
+}
