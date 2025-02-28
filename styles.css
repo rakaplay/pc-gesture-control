@@ -1,3 +1,4 @@
+
 html {
   scroll-behavior: smooth;
 }
@@ -122,10 +123,6 @@ footer {
   --md-ref-typeface-brand: 'Roboto';
   --md-ref-typeface-plain: system-ui, sans-serif;
 }
-.highlight {
-  background-color: rgba(255, 235, 59, 0.5);
-  border-radius: 3px;
-}
 .anch {
   opacity: 0;
   font-size: 0.8em;
@@ -139,10 +136,7 @@ h2:hover .anch,
 h3:hover .anch {
   opacity: 1;
 }
-/*.card:hover {*/
-/*  transform: translateY(-3px);*/
-/*  box-shadow: 0 8px 16px rgba(0,0,0,0.15);*/
-/*}*/
+
 .video-container {
   max-width: 80vw;
   margin: 0 auto;
@@ -226,7 +220,7 @@ md-switch {
 
 }
 
-/* Эффект при наведении */
+
 md-switch:hover {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
@@ -236,12 +230,107 @@ md-switch:hover {
 }
 .settings-container {
   flex-wrap: wrap;
-  max-width: 800px; /*  ширина контейнера */
+  max-width: 800px; 
   margin: 0 auto;
 }
 .setting-item {
-  flex: 1 1 calc(25% - 20px); /*  3 элемента в ряд, учитывая отступы */
-  max-width: calc(25% - 20px); /* Максимальная ширина элемента */
+  flex: 1 1 calc(40% - 0px); 
   box-sizing: border-box;
-   margin: 10px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+
+:root {
+  --background-gradient: linear-gradient(135deg, #f9f9f9, #ffffff);
+  --text-color: #000;
+  --card-bg: #fff;
+  --filled-card-bg: color-mix(in srgb, var(--md-sys-color-primary) 30%, white 70%);
+  --outlined-card-bg: color-mix(in srgb, var(--md-sys-color-primary) 10%, white 90%);
+  --outlined-card-border: 1px solid #999;
+  --link-color: var(--md-sys-color-secondary);
+  --pre-bg: #353030;
+  --pre-color: #ffffff;
+  --footer-color: #555;
+  --footer-border: 1px solid #eee;
+}
+
+body.dark-theme {
+  --background-gradient: #1c1c1c;
+  --text-color: #fff;
+  --card-bg: #121212;
+  --filled-card-bg: #282828;
+  --outlined-card-bg:  #121212;
+  --outlined-card-border: 1px solid #666;
+  --link-color: var(--md-sys-color-secondary);
+  --pre-bg: #222;
+  --pre-color: #eee;
+  --footer-color: #aaa;
+  --footer-border: 1px solid #444;
+}
+.dark-theme {
+  --md-sys-color-primary: color-mix(in srgb, var(olive) 30%, rgb(0, 0, 0) 70%);
+  --md-sys-color-secondary: rgb(255, 174, 160); 
+  --md-ref-typeface-brand: 'Roboto';
+  --md-ref-typeface-plain: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--md-ref-typeface-plain);
+  background: var(--background-gradient);
+  color: var(--text-color);
+}
+
+.card {
+  background-color: var(--card-bg);
+}
+
+.filled_card {
+  background-color: var(--filled-card-bg);
+}
+
+.outlined_card {
+  background-color: var(--outlined-card-bg);
+  border: var(--outlined-card-border);
+}
+
+a {
+  color: var(--link-color);
+}
+
+pre {
+  background: var(--pre-bg);
+  color: var(--pre-color);
+}
+
+footer {
+  color: var(--footer-color);
+  border-top: var(--footer-border);
+}
+
+
+body.dark-theme #status {
+  color: #ff6666; 
+}
+
+body.dark-theme h1 {
+  color: #fff; 
+}
+
+
+md-filled-button[disabled] {
+  --md-filled-button-disabled-container-color: #ccc;
+  --md-filled-button-disabled-label-text-color: #666;
+}
+
+
+body.dark-theme md-filled-button[disabled] {
+  --md-filled-button-disabled-container-color: #555; 
+  --md-filled-button-disabled-label-text-color: #aaa; 
 }

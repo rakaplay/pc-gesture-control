@@ -131,8 +131,8 @@ hands.onResults((results) => {
       status.style.color = "green";
     }
     const landmarks = results.multiHandLandmarks[0];
-    drawConnectors(canvas_risovka, landmarks, HAND_CONNECTIONS, { color: "#00FF00", lineWidth: 4 });
-    drawLandmarks(canvas_risovka, landmarks, { color: "#FF0000", radius: 6 });
+    drawConnectors(canvas_risovka, landmarks, HAND_CONNECTIONS, { color: "#44EE22", lineWidth: 4 });
+    drawLandmarks(canvas_risovka, landmarks, { color: "#EE7722", radius: 3 });
 
     let indexFinger = landmarks[8];
     let middleFinger = landmarks[12];
@@ -152,16 +152,17 @@ hands.onResults((results) => {
      } else {
       relativeYClick = mainPoint.y;
     }
-    document.getElementById("finger_position").innerText = "Позиция: \n "+relativeXClick+" "+relativeYClick
+    
     const absoluteXClick = relativeXClick * window.innerWidth;
     const absoluteYClick = relativeYClick * window.innerHeight;
 
 
-    console.log(indexFinger.z)
+    
     const relativeXScroll = 1 - indexFinger.x;
     const relativeYScroll = indexFinger.y;
-    let absoluteXScroll = relativeXScroll * window.innerWidth;
-    let absoluteYScroll = relativeYScroll * window.innerHeight;
+    const absoluteXScroll = relativeXScroll * window.innerWidth;
+    const absoluteYScroll = relativeYScroll * window.innerHeight;
+
     let scrollFlag = false;
     let right_click_flag = false; 
     if (middleFinger && indexFinger) {
@@ -173,8 +174,10 @@ hands.onResults((results) => {
         scrollFlag = true;
         scrollPointer.style.transform = `translate(${absoluteXClick - scrollPointer.offsetWidth / 2}px, ${absoluteYClick - scrollPointer.offsetHeight / 2}px)`;
         scrollPointer.style.display = "block";
+        status.innerText = 'Рука распознана; распознан скролл';
       } else {
         scrollFlag = false;
+        status.innerText = 'Рука распознана; жестов не обнаружено';
         scrollPointer.style.display = "none";
       }
     } else {
@@ -188,19 +191,23 @@ hands.onResults((results) => {
         (indexFinger.x - thumb.x) * canvas_element.width,
         (indexFinger.y - thumb.y) * canvas_element.height
       );
-      if (distance < 18) {
+      if (distance < 20) {
         click_flag = true;
         pointer.style.transform = `translate(${absoluteXClick - pointer.offsetWidth / 2}px, ${absoluteYClick - pointer.offsetHeight / 2}px)`;
         pointer.style.display = "block";
+        if (!scrollFlag) status.innerText = 'Рука распознана; распознан клик';
+
       } else if (distance < 40) {
         move_flag = true;
         pointer.style.transform = `translate(${absoluteXClick - pointer.offsetWidth / 2}px, ${absoluteYClick - pointer.offsetHeight / 2}px)`;
         pointer.style.display = "block";
+        if (!scrollFlag) status.innerText = 'Рука распознана; обнаружены близкие друг к другу указательный и большой пальцы';
       } else {
         move_flag = false;
         pointer.style.display = "none";
       }
     } else {
+      status.innerText = "Рука распознана; жестов не обнаружено";
       pointer.style.display = "none";
     }
     // Проверка для правого клика (большой и безымянный пальцы)
@@ -209,7 +216,7 @@ hands.onResults((results) => {
         (thumb.x - bezymFinger.x) * canvas_element.width,
         (thumb.y - bezymFinger.y) * canvas_element.height
       );
-      if (rightClickDistance < 18) {
+      if (rightClickDistance < 20) {
         right_click_flag = true;
         pointer.style.transform = `translate(${absoluteXClick - pointer.offsetWidth / 2}px, ${absoluteYClick - pointer.offsetHeight / 2}px)`;
         pointer.style.display = "block";
@@ -276,4 +283,26 @@ hands.onResults((results) => {
     pointer.style.display = "none";
     scrollPointer.style.display = "none";
   }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggler = document.getElementById('theme-toggler');
+
+  // Загружаем сохраненную тему из localStorage
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+    themeToggler.selected = true;
+  }
+
+  // Переключаем тему при изменении состояния переключателя
+  themeToggler.addEventListener('change', () => {
+    if (themeToggler.selected) {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    }
+  });
 });

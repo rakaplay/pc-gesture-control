@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1 id="anch">Распознавание рук</h1>
+  <h1 id="anch">Распознавание руки</h1>
   <!-- Основной контент -->
   <div id="status" style="text-align: center; margin-bottom: 10px; font-size: 1.2em; color: red;">Камера остановлена</div>
   
@@ -49,7 +49,10 @@
   </div>
   <h1 id="anch" style="font-size: 300%;">Настройки</h2>
   <div class="card outlined_card beautify-content settings-container">
-    
+    <div class="card filled_card beautify-content setting-item">
+      Темная тема 
+      <md-switch selected id="theme-toggler"></md-switch>
+      </div>
     <div class="card filled_card beautify-content setting-item">
     Инверсия положение курсора, по оси X
     <md-switch selected id="flipX"></md-switch>
@@ -59,9 +62,12 @@
     <md-switch id="flipY">
     </md-switch>
   </div>
- <div class="card outlined_card setting-item">
-  <span id="finger_position">Позиция клика</span>
- </div>
+  <div class="card filled_card beautify-content setting-item">
+    Регулировать расстояние для клика<br>
+    <md-slider min="15" max="50" value="18"></md-slider>
+  </div>
+  
+</div>
   </h1>
 </div>
   <div id="pointer"></div>
