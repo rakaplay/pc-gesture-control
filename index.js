@@ -141,7 +141,7 @@ hands.onResults((results) => {
     let mainPoint = landmarks[1];
     let mizinFinger = landmarks[20];
     let relativeXClick = mainPoint.x;
-    const relativeYClick = mainPoint.y;
+    let relativeYClick = mainPoint.y;
     if (document.getElementById("flipX").selected){
      relativeXClick = 1 - mainPoint.x;
     } else {
@@ -152,17 +152,16 @@ hands.onResults((results) => {
      } else {
       relativeYClick = mainPoint.y;
     }
-
+    document.getElementById("finger_position").innerText = "Позиция: \n "+relativeXClick+" "+relativeYClick
     const absoluteXClick = relativeXClick * window.innerWidth;
     const absoluteYClick = relativeYClick * window.innerHeight;
 
 
-    
+    console.log(indexFinger.z)
     const relativeXScroll = 1 - indexFinger.x;
     const relativeYScroll = indexFinger.y;
-    const absoluteXScroll = relativeXScroll * window.innerWidth;
-    const absoluteYScroll = relativeYScroll * window.innerHeight;
-
+    let absoluteXScroll = relativeXScroll * window.innerWidth;
+    let absoluteYScroll = relativeYScroll * window.innerHeight;
     let scrollFlag = false;
     let right_click_flag = false; 
     if (middleFinger && indexFinger) {
