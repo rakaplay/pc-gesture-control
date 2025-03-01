@@ -182,7 +182,7 @@ def run_server():
     finally:
         server_loop.close()
 
-# --- GUI НА KivyMD ---
+
 
 class MainApp(MDApp):
     status_text = StringProperty("Не подключено")
@@ -191,25 +191,28 @@ class MainApp(MDApp):
         # Ограничиваем размер окна
         Window.size = (250, 180)
         kv = '''
-BoxLayout:
+MDBoxLayout:
     orientation: "vertical"
     padding: dp(10)
     spacing: dp(10)
+    md_bg_color: (17/255, 17/255, 17/255)
 
     MDLabel:
         text: "Статус: " + app.status_text
         halign: "center"
-        theme_text_color: "Primary"
+        color: (240/255, 240/255, 240/255)
         font_style: "H6"
         size_hint_y: None
         height: self.texture_size[1]
 
-    MDRaisedButton:
+    MDFillRoundFlatButton:
+        md_bg_color: (128/255, 128/255, 0)
         text: "Подключиться"
         pos_hint: {"center_x": 0.5}
         on_release: app.connect_server()
 
-    MDRaisedButton:
+    MDFillRoundFlatButton:
+        md_bg_color: (128/255, 128/255, 0)
         text: "Отключиться"
         pos_hint: {"center_x": 0.5}
         on_release: app.disconnect_server()
