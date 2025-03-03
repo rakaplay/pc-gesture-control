@@ -16,8 +16,8 @@ let altTabGestureActive = false;
 let altTabGestureStartTime = null;
 let altTabLastDetectedTime = null;
 let altTabWasDetected = false;
-const ALT_TAB_HOLD_TIME = 500; // 500 мс
-const ALT_TAB_IDLE_TIME = 500; // 500 мс
+const ALT_TAB_HOLD_TIME = 500; 
+const ALT_TAB_IDLE_TIME = 2000; 
 
 const video_element = document.getElementById("video");
 const canvas_element = document.getElementById("canvas");
@@ -39,7 +39,7 @@ let cameraActive = false;
 
 let prev_abs_x = null;
 let prev_abs_y = null;
-const threshold = 1;
+const threshold = 0;
 
 turn_on_camera.addEventListener("click", () => {
   navigator.mediaDevices.getUserMedia({ video: { frameRate: { ideal: 30, max: 60 } } })
@@ -116,7 +116,7 @@ const hands = new Hands({
 });
 hands.setOptions({
   maxNumHands: 1,
-  modelComplexity: 1,
+  modelComplexity: 0,
   minDetectionConfidence: 0.8,
   minTrackingConfidence: 0.8,
 });
@@ -135,7 +135,8 @@ hands.onResults((results) => {
     drawLandmarks(canvas_risovka, landmarks, { color: "#EE7722", radius: 3 });
 
     let indexFinger = landmarks[8];
-    let middleFinger = landmarks[12];
+    let scrollIndexFinger = landmarks[7];
+    let scrollMiddleFinger = landmarks[12];
     let thumb = landmarks[4];
     let bezymFinger = landmarks[16];
     let mainPoint = landmarks[1];
@@ -165,10 +166,10 @@ hands.onResults((results) => {
 
     let scrollFlag = false;
     let right_click_flag = false; 
-    if (middleFinger && indexFinger) {
+    if (scrollMiddleFinger && indexFinger) {
       const scrollDistance = Math.hypot(
-        (middleFinger.x - indexFinger.x) * canvas_element.width,
-        (middleFinger.y - indexFinger.y) * canvas_element.height
+        (scrollMiddleFinger.x - scrollIndexFinger.x) * canvas_element.width,
+        (scrollMiddleFinger.y - scrollIndexFinger.y) * canvas_element.height
       );
       if (scrollDistance < 18) {
         scrollFlag = true;
@@ -228,7 +229,7 @@ hands.onResults((results) => {
         if (scrollFlag) {
           socket.send(JSON.stringify({ scroll: true, scrollY: relativeYScroll, moveFlag: false }));
         } else {
-          socket.send(JSON.stringify({ x: relativeXClick, y: relativeYClick, click: click_flag, right_click: right_click_flag, scroll: false, moveFlag: true }));
+          socket.send(JSON.stringify({ x: relativeXClick, y: relativeYClick, click: click_flag, right_click: right_click_flag, scroll: false, moveFlag: move_flag }));
         }
         prev_abs_x = absoluteXClick;
         prev_abs_y = absoluteYClick;

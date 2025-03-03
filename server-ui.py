@@ -19,11 +19,12 @@ screenWidth, screenHeight = pyautogui.size()
 # Параметры сглаживания для курсора
 prev_x = None
 prev_y = None
-sm_factor = 0.75
-k_factor = 0.5
+sm_factor = 0.85
+k_factor = 0.2
 
 def safe_zone(x, k):
-    return ((x - k) * 2) + k
+    return x * 2 - (2/4)
+
 
 def smooth_coordinates(x, y):
     global prev_x, prev_y
@@ -47,14 +48,14 @@ async def echo(websocket, path):
     scroll_baseline = None
     inertia_velocity = 200
     last_scroll_event_time = time.time()
-    deceleration = 500
+    deceleration = 200
     scroll_update_interval = 0.2
 
     # Зоны для ограничения движения курсора
-    min_x =  screenHeight * (-0.3)
-    max_x = screenWidth * 1.3
-    min_y =  screenWidth * (-0.3)
-    max_y = screenHeight * 1.3
+    min_x =  screenHeight * (-0.5)
+    max_x = screenWidth * 1.5
+    min_y =  screenWidth * (-0.5)
+    max_y = screenHeight * 1.5
 
     # Переменная для alt+tab режима
     altTab_active = False
