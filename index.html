@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home" />
   
-  <!-- Import map для Material Web -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <script type="importmap">
     {
       "imports": {
@@ -28,43 +28,67 @@
     import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
     document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
   </script>
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Noto+Emoji:wght@300..700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Onest:wght@100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1 id="anch">Распознавание руки</h1>
-  <!-- Основной контент -->
-  <div id="status" style="text-align: center; margin-bottom: 10px; font-size: 1.2em; color: red;">Камера остановлена</div>
-  
+  <div class="animated-gradient-bg"></div>
+  <h1 id="anch">На кончиках пальцев</h1>
+
+  <div class="status-style">
+    <div id="status">Камера остановлена</div>
+  </div>
+  <div class='centerer'>
+
+
+</div>
   <div class="card outlined_card">
     <div class="video-container">
+      <div class="there-will-be-video">Здесь должно проигрываться видео с веб-камеры при запуске</div>
       <canvas id="canvas" width="640" height="360"></canvas>
     </div>
   </div>
   
   <div class="card outlined_card beautify-content">
-    <md-filled-button id="turn_on_camera">Разрешить доступ к камере</md-filled-button>
-    <md-filled-button id="turn_off_camera" disabled>Остановить камеру</md-filled-button>
-    <md-filled-button id="pipButton" disabled>Включить PiP</md-filled-button>
-    <md-filled-button onClick="top.location.href='faq'">FAQ</md-filled-button>
+    <!-- <md-filled-button id="turn_on_camera">Разрешить доступ к камере</md-filled-button> -->
+        <!-- <md-filled-button id="turn_off_camera" disabled>Остановить камеру</md-filled-button> -->
+    <!-- <md-filled-button id="pipButton" disabled>Включить PiP</md-filled-button>
+    <md-filled-button onClick="top.location.href='faq'">FAQ</md-filled-button> -->
+    <button class = 'btn-style' id="turn_on_camera">Разрешить доступ к камере</button>
+    <button class = 'btn-style' id="turn_off_camera" disabled>Остановить камеру</button>
+    <button class = 'btn-style' id="pipButton" disabled>Фоновый режим</button>
+    <button class = 'btn-style' onClick="top.location.href='faq'">FAQ</button>
+    
   </div>
   <h1 id="anch" style="font-size: 300%;">Настройки</h2>
   <div class="card outlined_card beautify-content settings-container">
-    <div class="card filled_card beautify-content setting-item">
+    <div class="card filled_card beautify-content setting-item" style="display: none">
       Темная тема 
-      <md-switch selected id="theme-toggler"></md-switch>
+      <label class="switch">
+        <input type="checkbox" selected id="theme-toggler">
+        <span class="slider"></span>
+      </label>
+      <!-- <md-switch selected id="theme-toggler"></md-switch> -->
       </div>
+     
     <div class="card filled_card beautify-content setting-item">
     Инверсия положение курсора, по оси X
-    <md-switch selected id="flipX"></md-switch>
+     <!-- <md-switch selected id="flipX"></md-switch>-->
+     <label class="switch" >
+      <input type="checkbox" id="flipX" selected>
+      <span class="slider"></span>
+    </label>
     </div>
     <div class="card filled_card beautify-content setting-item">
       Инверсия положение курсора, по оси Y
-    <md-switch id="flipY">
-    </md-switch>
+      <label class="switch">
+        <input type="checkbox" selected id="flipY">
+        <span class="slider"></span>
+      </label>
   </div>
   <div class="card filled_card beautify-content setting-item">
-    Регулировать расстояние для клика<br>
-    <md-slider min="15" max="50" value="18"></md-slider>
+    Регулировать максимальную дальность распознавания (метры)<br>
+    <input  type="range"  class="slide" min="10" max="200" value="100" id="work-distance">
   </div>
   
 </div>
@@ -73,9 +97,9 @@
   <div id="pointer"></div>
   <div id="scroll_point"></div>
   <footer>
-    © Права (не) защищены. Пж не воруйте 👉👈
+    © Лугин Иван, 2025. 
   </footer>
-  <video id="video" autoplay playsinline style="opacity: 0; width:20px; height:30px;"></video>
+  <video id="video" autoplay playsinline style="display: none;"></video>
   
  <script src="index.js"></script>
   

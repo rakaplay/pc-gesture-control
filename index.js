@@ -1,16 +1,4 @@
 let flipX = true;
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('h1[id], h2[id], h3[id]').forEach(heading => {
-    if (!heading.querySelector('.anch')) {
-      const anchor = document.createElement('a');
-      anchor.href = `#${heading.id}`;
-      anchor.className = 'anch';
-      anchor.textContent = '#';
-      heading.appendChild(anchor);
-    }
-  });
-});
-
 // Глобальные переменные для alt+tab
 let altTabGestureActive = false;
 let altTabGestureStartTime = null;
@@ -32,22 +20,31 @@ const status = document.getElementById("status");
 const socket = new WebSocket("ws://localhost:8082");
 socket.addEventListener("open", () => console.log("Вебсокет подключён"));
 socket.addEventListener("error", (error) => console.error("Вебсокет, ошибка:", error));
-
+async function restartHands() {
+console.log("Перезапуск MediaPipe...");
+  if (!hands) {
+    hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+    await hands.initialize();
+  }
+}
+setInterval(() => {
+  restartHands();
+}, 3000);
 let pipVideo;
 let camera = null;
 let cameraActive = false;
 
 let prev_abs_x = null;
 let prev_abs_y = null;
-const threshold = 0;
+const threshold = -1;
 
 turn_on_camera.addEventListener("click", () => {
-  navigator.mediaDevices.getUserMedia({ video: { frameRate: { ideal: 30, max: 60 } } })
+  navigator.mediaDevices.getUserMedia({ video: { frameRate: { ideal: 60, max: 60 } } })
     .then((stream) => {
       video_element.srcObject = stream;
       cameraActive = true;
       status.innerText = "Ожидание руки";
-      status.style.color = "orange";
+      status.style.background = "rgba(255, 165, 0, 0.2)";
       
       turn_on_camera.disabled = true;
       turn_off_camera.disabled = false;
@@ -81,7 +78,7 @@ turn_off_camera.addEventListener("click", () => {
     camera = null;
     cameraActive = false;
     status.innerText = "Камера остановлена";
-    status.style.color = "red";
+    status.style.background = "#ff000020";
     turn_on_camera.disabled = false;
     turn_off_camera.disabled = true;
     const stream = video_element.srcObject;
@@ -101,24 +98,24 @@ pipButton.addEventListener("click", async () => {
   try {
     if (document.pictureInPictureElement) {
       await document.exitPictureInPicture();
-      pipButton.innerText = "Включить PiP";
+      pipButton.innerText = "Фоновый режим";
     } else {
       await pipVideo.requestPictureInPicture();
-      pipButton.innerText = "Выключить PiP";
+      pipButton.innerText = "Отключить фоновый режим";
     }
   } catch (error) {
     console.error("Ошибка переключения PiP:", error);
   }
 });
 
-const hands = new Hands({
+let hands = new Hands({
   locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
 });
 hands.setOptions({
   maxNumHands: 1,
   modelComplexity: 0,
   minDetectionConfidence: 0.8,
-  minTrackingConfidence: 0.8,
+  minTrackingConfidence: 0.5,
 });
 
 hands.onResults((results) => {
@@ -128,7 +125,7 @@ hands.onResults((results) => {
   if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
     if (cameraActive) {
       status.innerText = "Рука распознана";
-      status.style.color = "green";
+      status.style.background = "#00800040";
     }
     const landmarks = results.multiHandLandmarks[0];
     drawConnectors(canvas_risovka, landmarks, HAND_CONNECTIONS, { color: "#44EE22", lineWidth: 4 });
@@ -143,12 +140,23 @@ hands.onResults((results) => {
     let mizinFinger = landmarks[20];
     let relativeXClick = mainPoint.x;
     let relativeYClick = mainPoint.y;
-    if (document.getElementById("flipX").selected){
+    let allowedDistance = true;
+
+    
+    let meterFactor = 200;
+    let maxDistance = document.getElementById("work-distance").value / 100; // Переводим в метры
+    
+    if (Math.abs(mainPoint.z) * meterFactor > maxDistance) {
+        allowedDistance = false;
+    } else {
+        allowedDistance = true;
+    }
+    if (document.getElementById("flipX").checked){
      relativeXClick = 1 - mainPoint.x;
     } else {
      relativeXClick = mainPoint.x;
     }
-    if (document.getElementById("flipY").selected){
+    if (document.getElementById("flipY").checked){
       relativeYClick = 1 - mainPoint.y;
      } else {
       relativeYClick = mainPoint.y;
@@ -163,28 +171,22 @@ hands.onResults((results) => {
     const relativeYScroll = indexFinger.y;
     const absoluteXScroll = relativeXScroll * window.innerWidth;
     const absoluteYScroll = relativeYScroll * window.innerHeight;
-
-    let scrollFlag = false;
     let right_click_flag = false; 
+    let scrollFlag = false;
+
     if (scrollMiddleFinger && indexFinger) {
       const scrollDistance = Math.hypot(
         (scrollMiddleFinger.x - scrollIndexFinger.x) * canvas_element.width,
         (scrollMiddleFinger.y - scrollIndexFinger.y) * canvas_element.height
       );
-      if (scrollDistance < 18) {
+      if (scrollDistance < 23) {
         scrollFlag = true;
-        scrollPointer.style.transform = `translate(${absoluteXClick - scrollPointer.offsetWidth / 2}px, ${absoluteYClick - scrollPointer.offsetHeight / 2}px)`;
-        scrollPointer.style.display = "block";
         status.innerText = 'Рука распознана; распознан скролл';
       } else {
         scrollFlag = false;
         status.innerText = 'Рука распознана; жестов не обнаружено';
-        scrollPointer.style.display = "none";
       }
-    } else {
-      pointer.style.display = "none";
-    }
-
+    } 
     let click_flag = false;
     let move_flag = false;
     if (indexFinger && thumb) {
@@ -227,9 +229,15 @@ hands.onResults((results) => {
     if (socket.readyState === WebSocket.OPEN) {
       if (!prev_abs_x || Math.abs(absoluteXClick - prev_abs_x) > threshold || Math.abs(absoluteYClick - prev_abs_y) > threshold) {
         if (scrollFlag) {
-          socket.send(JSON.stringify({ scroll: true, scrollY: relativeYScroll, moveFlag: false }));
+          socket.send(JSON.stringify({ 
+            scroll: true, scrollY: relativeYScroll,
+             moveFlag: false, allowedDistance: allowedDistance }));
         } else {
-          socket.send(JSON.stringify({ x: relativeXClick, y: relativeYClick, click: click_flag, right_click: right_click_flag, scroll: false, moveFlag: move_flag }));
+          socket.send(JSON.stringify({ 
+            x: relativeXClick, y: relativeYClick, 
+            click: click_flag, right_click: right_click_flag, 
+            scroll: false, moveFlag: move_flag, allowedDistance: allowedDistance
+          }));
         }
         prev_abs_x = absoluteXClick;
         prev_abs_y = absoluteYClick;
@@ -279,31 +287,20 @@ hands.onResults((results) => {
   } else {
     if (cameraActive) {
       status.innerText = "Ожидание руки";
-      status.style.color = "orange";
+      status.style.background = "rgba(255, 165, 0, 0.2)";
     }
     pointer.style.display = "none";
     scrollPointer.style.display = "none";
   }
 });
+const slider = document.getElementById('work-distance');
 
-document.addEventListener('DOMContentLoaded', () => {
-  const themeToggler = document.getElementById('theme-toggler');
-
-  // Загружаем сохраненную тему из localStorage
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-theme');
-    themeToggler.selected = true;
-  }
-
-  // Переключаем тему при изменении состояния переключателя
-  themeToggler.addEventListener('change', () => {
-    if (themeToggler.selected) {
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    }
-  });
+slider.addEventListener('input', function() {
+  const percent = (this.value - this.min) / (this.max - this.min) * 100;
+  this.style.background = `linear-gradient(to right, var(--md-sys-color-secondary) ${percent}%, lightgray ${percent}%)`;
 });
+
+
+const themeToggler = document.getElementById('theme-toggler');
+themeToggler.selected = true;
+document.body.classList.add('dark-theme');
