@@ -1,0 +1,7 @@
+.video-fragment {
+    display: flex;
+    max-width: 500px;
+    width: 100%;
+    margin: 20px auto;
+    border-radius: 20px;
+}

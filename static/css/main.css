@@ -1,0 +1,210 @@
+:root{
+    --bg-color: #000000;
+    --bar-color: #131313;
+    --text-color: #ffffff;
+    --hr-color: #88888820;
+    --bar-bottom-color: #2f2f2f;
+    --font-main: Inter, sans-serif;
+    --font-title: Inter, sans-serif;
+    --font-title-2: "Old Standard TT", sans-serif;
+    --font-code: "Martian Mono", serif;
+    --button-border: #3f3f3f;
+    --button-color: #3a3a3a;
+    --body-color: #222222;
+    --border: #383838;
+    --border-no-hover: #ffffff;
+}
+body{
+    background-color: var(--body-color);
+    font-family: var(--font-main);
+    color: var(--text-color);
+    margin: 0;
+    padding-top: 70px; /* Increased padding to avoid overlap with fixed bar */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.container {
+    max-width: 2560px;
+    margin: 20px auto; /* Added top margin */
+    padding: 20px; /* Added padding */
+    text-align: left;
+    max-width: 70%;
+    min-width: 720px;
+    background-color: #1b1b1b;
+    z-index: 0;
+    border-radius: 20px;
+    display: flex; /* Use flex for centering if needed, but default block works */
+    flex-direction: column;
+}
+
+
+
+@media (max-width: 720px) {
+    .container{
+        border-radius: 20px;
+        margin: 20px auto; /* Added top margin */
+        padding: 15px; /* Adjusted padding */
+        text-align: left;
+        width: 90%; /* Adjusted width */
+        display: flex;
+        flex-direction: column;
+        min-width: unset; /* Remove min-width for small screens */
+        max-width: 100%; /* Allow full width */
+    }
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: var(--font-title);
+    color: var(--text-color);
+    font-weight: 800;
+    text-align: center; /* Keep titles centered if desired */
+
+}
+h1{
+    font-size: 3.5em;
+}
+h2{
+    font-size: 3em;
+}
+h3{
+    font-size: 2.5em;
+}
+h4{
+    font-size: 2em;
+}
+h5{
+    font-size: 1.5em;
+}
+h6{
+    font-size: 1em;
+}
+.top-app-bar{
+    border-radius: 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--bar-color);
+    min-height: 20px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; 
+    box-sizing: border-box; 
+}
+#content {
+    filter: blur(0);
+    opacity: 1;
+  }
+.top-app-bar__title {
+    color: var(--text-color);
+    font-size: 1.2em; 
+    margin: 0;
+    font-family: var(--font-title); 
+    user-select: none;
+}
+
+.top-app-bar__navigation {
+    display: flex; 
+    align-items: center;
+}
+
+.top-app-bar__navigation button {
+    margin-left: 10px;
+}
+.gradient-background {
+    background: radial-gradient(at 0% 0%, var(--secondary), black 50%),
+                radial-gradient(at 50% 0%, var(--blue), black 50%),
+                radial-gradient(at 100% 0%, var(--secondary), black 50%); 
+    opacity: 0;
+    background-blend-mode: lighten;
+    height: 500px; 
+    width: 100%;
+    overflow: hidden; 
+    position: absolute;
+    z-index: -1;
+    display: none;
+}
+div{
+    line-height: 1.2em;
+}
+hr{
+    border: 1px solid var(--hr-color);
+    margin: 20px;
+}
+.section {
+    margin-bottom: 30px;
+}
+*{
+    font-size: 1.05em;
+}
+li{
+    line-height: 1.5em;
+}
+.section__title {
+    line-height: 1.2em;
+    text-align: center;
+    font-family: var(--font-title); /* Apply title font */
+}
+div, label { /* Apply main font and color to general elements */
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.2em; /* Improved readability */
+}
+p{
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.5em;
+    font-size: larger;
+}
+strong{
+    font-weight: 800;
+}
+.centered{
+    margin: 0 auto;
+    display: flex;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.page.exit {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.page.enter {
+    transform: translateX(-100%);
+    opacity: 1;
+}
+
+.hidden{
+    display: none;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.try{
+    scale: 1.1;
+    margin: 1em;
+}
+
+
+body{
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale; 
+    text-rendering: optimizeLegibility;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}

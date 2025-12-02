@@ -1,0 +1,94 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding-top: 20px; 
+}
+.main{
+    margin: 0 auto;
+    margin-top: 64px;
+}
+
+.block{
+    margin: 10px auto;
+    text-align: center;
+    background-color: #141414;
+    max-width: 45%;
+    padding: 20px 0px;
+    border-radius: 48pt;
+    transition: all 0.5s ease-in-out;
+}
+.block--title{
+    font-size: 40pt;
+    padding: 0;
+    font-kerning: none;
+}
+.block--set1{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.block--set2{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.block--set3{
+  max-width: 43%;
+  display: flex;
+  gap: 10px;
+  justify-content: left;
+  padding: 10px 1%;
+}
+.set2-title{
+    max-width: fit-content;
+    padding: 10px 20px;
+    background-color: transparent;
+}
+
+canvas {
+  width: 50%;
+  height: auto;
+  margin: auto;
+  border-radius: 10px;         
+  transition: all 1s ease-in-out;  
+}
+
+.video-container canvas.active {
+  transform: scale(1);            
+}
+
+.video-container canvas {
+  width: 50%;
+  height: auto;
+  margin: auto;
+  border-radius: 10px;
+  transition: 1s ease-in-out;
+}
+video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+        /* Стили для плавного скрытия/показа */
+        .hidden {
+          display: none !important;
+      }
+      .block, .button.minim, .button.maximize {
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          opacity: 1;
+          transform: translateY(0);
+      }
+      .fading-out {
+          opacity: 0;
+          transform: translateY(-10px); /* Небольшой сдвиг вверх при исчезновении */
+          pointer-events: none; /* Предотвратить клики во время анимации */
+      }
+      .start-fade-in {
+          opacity: 0;
+          transform: translateY(10px); /* Небольшой сдвиг снизу при появлении */
+      }

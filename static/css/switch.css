@@ -1,0 +1,56 @@
+
+
+.switch-container { 
+    display: block;
+    align-items: center;
+    margin-bottom: 0px; 
+}
+/* The switch - the box around the slider */
+.switch {
+   font-size: 16px;
+   position: relative;
+   display: inline-block;
+   width: 3.5em;
+   height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+ opacity: 0;
+ width: 0;
+ height: 0;
+}
+
+/* The slider */
+.slider {
+ position: absolute;
+ cursor: pointer;
+ inset: 0;
+ border: 2px solid var(--button-color);
+ border-radius: 50px;
+ transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slider:before {
+ position: absolute;
+ content: "";
+ height: 1.5em;
+ width: 1.5em;
+ left: 0.1em;
+ bottom: 0.1em;
+ padding: -20%;
+ scale: 0.8;
+ background-color: white;
+ border-radius: inherit;
+ transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.switch input:checked + .slider {
+ border: 1px solid #565656;
+ background: #565656;
+}
+
+.switch input:checked + .slider:before {
+ transform: translateX(1.88em);
+ background-color: black;
+}

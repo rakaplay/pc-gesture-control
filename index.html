@@ -1,107 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Распознавание руки</title>
-  
-  <!-- Импорты шрифтов и иконок -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home" />
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <script type="importmap">
-    {
-      "imports": {
-        "@material/web/": "https://esm.run/@material/web/"
-      }
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница управления</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/css/main.css">
+    <link type="text/css" rel="stylesheet" href="static/css/button.css">
+    <link type="text/css" rel="stylesheet" href="static/css/table.css">
+    <link type="text/css" rel="stylesheet" href="static/css/switch.css">
+    <link type="text/css" rel="stylesheet" href="static/css/video.css">
+    <link type="text/css" rel="stylesheet" href="static/css/icon-button.css">
+    <link type="text/css" rel="stylesheet" href="static/css/inference.css">
+    <link type="text/css" rel="stylesheet" href="static/css/slider-range.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <script src="static/js/index.js" defer></script> <!-- Добавлен defer -->
+    <script src="static/js/redirects.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-  <script type="module">
-
-    import '@material/web/all.js';
-    import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-  </script>
-   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Noto+Emoji:wght@300..700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Onest:wght@100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="animated-gradient-bg"></div>
-  <h1 id="anch">На кончиках пальцев</h1>
 
-  <div class="status-style">
-    <div id="status">Камера остановлена</div>
-  </div>
-  <div class='centerer'>
+    <div class="inference-bg"></div>
+    <header class="top-app-bar">
+        <h1 class="top-app-bar__title">
+            Распознавание жестов
+        </h1>
 
 
-</div>
-  <div class="card outlined_card">
-    <div class="video-container">
-      <div class="there-will-be-video">Здесь должно проигрываться видео с веб-камеры при запуске</div>
-      <canvas id="canvas" width="640" height="360"></canvas>
+    </header>
+    <div id="content">
+        <div class="main">
+            <div class="block block--title">
+                Страница управления
+            </div>
+
+            <div class="block">
+                <div class="video-container">
+                    <canvas id="canvas" width="640" height="0"></canvas>
+                </div>
+            </div>
+
+            <div class="block block--set1">
+                <button class = 'button button--accent active' id="turn_on_camera">Разрешить доступ к камере</button>
+                <button class = 'button active' id="turn_off_camera" disabled>Остановить камеру</button>
+                <button class = 'button active' id="pipButton" disabled>Фоновый режим</button>
+            </div>
+
+            <div class="block set2-title">
+                Настройки
+            </div>
+
+            <div class="block block--set2">
+                <button class = 'active button checkboxbutton' data-target="flipX" id="toggleFlipXButton">
+                    Инверсия по X
+                </button>
+                <input type="checkbox" id="flipX" class="hidden" checked>
+                
+                <button class = 'active button checkboxbutton' data-target="flipY" id="toggleFlipYButton">
+                    Инверсия по Y
+                </button>
+                <input type="checkbox" id="flipY" class="hidden">
+                <div class = 'button' id="distanceControlContainer">
+                    Максимальное расстояние
+                    <input type="range" class="slide" min="10" max="200" value="100" id="work-distance">
+                </div>
+            </div>
+            <button class = 'active button checkboxbutton button--outline minim'>
+                Свернуть
+            </button>
+
+            <div class="block block--set3 hidden">
+                <button class="active checkboxbutton icon-button icon-button--text" id="set3-flipX">
+                    X
+                </button>
+                <button class="active checkboxbutton icon-button icon-button--text" id="set3-flipY">
+                    Y
+                </button>
+                <div class="checkboxbutton icon-button expanded" id="set3-distance-container">
+                    <input type="range" class="slide" min="10" max="200" value="100" id="set3-work-distance">
+                </div>
+                <button class="active checkboxbutton icon-button" id="set3-turn_on_camera">
+                    <span class="material-symbols-outlined">
+                        videocam
+                    </span>
+                </button>
+                <button class="active checkboxbutton icon-button" id="set3-turn_off_camera">
+                    <span class="material-symbols-outlined">
+                        no_photography
+                    </span>
+                </button>
+                <button class="active checkboxbutton icon-button" id="set3-pipButton">
+                    <span class="material-symbols-outlined">
+                        picture_in_picture_alt
+                    </span>
+                </button>
+                <button class="active checkboxbutton icon-button" id="set3-faq">
+                    <span class="material-symbols-outlined">
+                        quiz
+                    </span>
+                </button>
+                <button class = 'active button checkboxbutton button--outline maximize'>
+                    Развернуть все
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <div class="card outlined_card beautify-content">
-    <!-- <md-filled-button id="turn_on_camera">Разрешить доступ к камере</md-filled-button> -->
-        <!-- <md-filled-button id="turn_off_camera" disabled>Остановить камеру</md-filled-button> -->
-    <!-- <md-filled-button id="pipButton" disabled>Включить PiP</md-filled-button>
-    <md-filled-button onClick="top.location.href='faq'">FAQ</md-filled-button> -->
-    <button class = 'btn-style' id="turn_on_camera">Разрешить доступ к камере</button>
-    <button class = 'btn-style' id="turn_off_camera" disabled>Остановить камеру</button>
-    <button class = 'btn-style' id="pipButton" disabled>Фоновый режим</button>
-    <button class = 'btn-style' onClick="top.location.href='faq'">FAQ</button>
-    
-  </div>
-  <h1 id="anch" style="font-size: 300%;">Настройки</h2>
-  <div class="card outlined_card beautify-content settings-container">
-    <div class="card filled_card beautify-content setting-item" style="display: none">
-      Темная тема 
-      <label class="switch">
-        <input type="checkbox" selected id="theme-toggler">
-        <span class="slider"></span>
-      </label>
-      <!-- <md-switch selected id="theme-toggler"></md-switch> -->
-      </div>
-     
-    <div class="card filled_card beautify-content setting-item">
-    Инверсия положение курсора, по оси X
-     <!-- <md-switch selected id="flipX"></md-switch>-->
-     <label class="switch" >
-      <input type="checkbox" id="flipX" selected>
-      <span class="slider"></span>
-    </label>
-    </div>
-    <div class="card filled_card beautify-content setting-item">
-      Инверсия положение курсора, по оси Y
-      <label class="switch">
-        <input type="checkbox" selected id="flipY">
-        <span class="slider"></span>
-      </label>
-  </div>
-  <div class="card filled_card beautify-content setting-item">
-    Регулировать максимальную дальность распознавания (метры)<br>
-    <input  type="range"  class="slide" min="10" max="200" value="100" id="work-distance">
-  </div>
-  
-</div>
-  </h1>
-</div>
-  <div id="pointer"></div>
-  <div id="scroll_point"></div>
-  <footer>
-    © Лугин Иван, 2025. 
-  </footer>
-  <video id="video" autoplay playsinline style="display: none;"></video>
-  
- <script src="index.js"></script>
-  
+    <script src="static/js/inference.js"></script>
+    <video id="video" autoplay playsinline style="display: none;"></video>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="static/js/main-inference.js"></script>
 </body>
 </html>

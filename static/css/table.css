@@ -1,0 +1,9 @@
+.invisible-table {
+    display: flex;
+    max-width: 500px;
+    margin: 10px auto;
+    border-spacing: 10px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+}

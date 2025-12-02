@@ -1,0 +1,91 @@
+
+.button {
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    white-space: nowrap; 
+    padding: 6px 12px; 
+    min-width: 20px;
+    max-width: 500px;
+    max-height: 32px;
+    min-height: 28px;
+    background: var(--button-color);
+    border: none;
+    border-radius: 50px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 12px; 
+    font-family: var(--font-main);
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: 0.1s ease-in-out;
+}
+
+.active:active{
+    background-color: #767676;
+    box-shadow: inset 0px 4px 4px #00000025;
+    transition: 0.1s ease-in-out;
+}
+
+.button--pressed{
+    background-color: #888;
+    box-shadow: inset 0px 4px 4px #00000025;
+}
+.button--outline {
+    background-color: 1px solid var(--border-no-hover);
+    border: 1px solid var(--button-border);
+    color: var(--text-color);
+}
+
+
+.button--accent {
+  background: var(--accent, #83ceeb);
+  color: black;
+  font-weight: 600;
+}
+
+.button--accent:hover {
+  background: #38bbc4;
+}
+
+
+
+.button:disabled {
+    background-color: #00000025;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.minim{
+    margin: 0 70%;
+    display: block;
+}
+
+.maximize{
+    vertical-align: middle;
+    display: inline;
+    margin: auto auto;
+}
+
+
+
+
+.block.fading-out,
+.block.start-fade-in {
+    opacity: 0;
+}
+.button.hidden{
+    opacity: 0;
+    position: absolute;
+    margin: -10000px;
+}
+.button{
+    opacity: 1;
+}
+.block.hidden {
+    display: none;
+}
+
+.main {
+    margin: 0 auto;
+    margin-top: 64px;
+}

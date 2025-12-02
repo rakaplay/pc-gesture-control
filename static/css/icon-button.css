@@ -1,0 +1,28 @@
+
+.icon-button {
+    position: relative; 
+    width: 40px;
+    height: 40px;
+    background: var(--button-color);
+    border: 0px solid var(--button-border);
+    border-radius: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 24px; 
+    font-family: var(--font-main);
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    filter: brightness(100%);
+    transition: all 0.4s ease;
+}
+.icon-button:hover{
+    filter: brightness(90%);
+}
+.icon-button--text{
+    font-size: 16px; 
+}
+
+.expanded{
+    width: fit-content;
+}
