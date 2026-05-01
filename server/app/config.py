@@ -9,7 +9,7 @@ HTML_CONTENT = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gest.ai Server</title>
+    <title>серверочек</title>
     
     <!-- Шрифты и иконки -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -183,7 +183,7 @@ HTML_CONTENT = """
     <div class="inference-bg"></div>
     
     <header class="top-app-bar">
-        <h1 class="top-app-bar__title">Локальный сервер Gest.ai</h1>
+        <h1 class="top-app-bar__title">Локальный сервер</h1>
     </header>
 
     <div class="main">
